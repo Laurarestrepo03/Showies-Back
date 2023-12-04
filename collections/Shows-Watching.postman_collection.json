@@ -1,0 +1,196 @@
+{
+	"info": {
+		"_postman_id": "f7399a55-385d-48f8-a7ba-5a4c73530cb0",
+		"name": "Shows-Watching",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17535481"
+	},
+	"item": [
+		{
+			"name": "Get watching of a show",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{api_user_id}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/shows/{{show_id}}/watching",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"shows",
+						"{{show_id}}",
+						"watching"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get watching of a show",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/shows/{{show_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"shows",
+								"{{show_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"userId\": \"9a33d597-408b-47f3-b994-9bf060269d21\",\n        \"showId\": \"f196654f-0e13-4ece-91f3-81abaa1e11ca\",\n        \"season\": 1,\n        \"episode\": 1,\n        \"lastSeen\": \"15/11/2023\"\n    },\n    {\n        \"userId\": \"9522ce16-39aa-419b-a5bf-a614ceefbbeb\",\n        \"showId\": \"f196654f-0e13-4ece-91f3-81abaa1e11ca\",\n        \"season\": 1,\n        \"episode\": 1,\n        \"lastSeen\": \"15/11/2023\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get watching of an invalid show",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"The show with the given id was not found\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{api_user_id}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/shows/{{invalid_id}}/watching",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"shows",
+						"{{invalid_id}}",
+						"watching"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get watching of an invalid show",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/shows/{{invalid_id}}/watching",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"shows",
+								"{{invalid_id}}",
+								"watching"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The show with the given id was not found\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "localhost:3000/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "invalid_id",
+			"value": "00000000-0000-0000-0000-000000000000",
+			"type": "string"
+		}
+	]
+}
