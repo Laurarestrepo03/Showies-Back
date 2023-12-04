@@ -67,9 +67,9 @@ describe('WatchingService', () => {
           showId: showsList[i].id,
           season: faker.datatype.number(),
           episode: faker.datatype.number(),
-          lastSeen: faker.datatype.number({min: 1928, max: 2023}) + "-0" + faker.datatype.number({min: 1, max: 9}) + "-0" + faker.datatype.number({min: 1, max: 9})
+          lastSeen: "0" + faker.datatype.number({min: 1, max: 9}) + "/0" + faker.datatype.number({min: 1, max: 9}) + "/" + faker.datatype.number({min: 1928, max: 2023})
       })
-        watchingList.push(watching);
+      watchingList.push(watching);
     }
   }
 
@@ -102,7 +102,7 @@ describe('WatchingService', () => {
       showId: showsList[1].id,
       season: faker.datatype.number(),
       episode: faker.datatype.number(),
-      lastSeen: faker.datatype.number({min: 1928, max: 2023}) + "-0" + faker.datatype.number({min: 1, max: 9}) + "-0" + faker.datatype.number({min: 1, max: 9}),
+      lastSeen: "0" + faker.datatype.number({min: 1, max: 9}) + "/0" + faker.datatype.number({min: 1, max: 9}) + "/" + faker.datatype.number({min: 1928, max: 2023}),
       user: usersList[0],
       show: showsList[1]
     }
